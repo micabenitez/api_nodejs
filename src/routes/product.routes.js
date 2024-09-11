@@ -17,6 +17,8 @@ const getInstrument = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
    
+    res.instrument = instrument
+    next()
 }
 
 router.get('/', async (req, res) => {
