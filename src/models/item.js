@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const productSchema = new mongoose.Schema(
+const itemSchema = new Schema(
     {
         name: String,
         marca: String,
@@ -9,7 +9,11 @@ const productSchema = new mongoose.Schema(
         descripcion: String,
         precio: Number,
         img_url: String
+    },
+    {
+        timestamps: true,
+        versionKey: false
     }
 )
 
-export default mongoose.model('Instrument', productSchema);
+export const ItemModel = model('items', itemSchema);

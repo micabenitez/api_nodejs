@@ -1,27 +1,29 @@
-import express from "express";
-import Instrument from '../models/product.model.js'
+import { Router } from "express";
+import Instrument from '../models/item.js'
+import { getItem, getItems, updateItem, postItem, deleteItem} from "..controllers/item.js"
 
-const router = express.Router()
+const router = Router()
 
-//middleware
-const getInstrument = async (req, res, next) => {
-    let instrument;
-    const { id } = req.params;
+
+// //middleware
+// const getInstrument = async (req, res, next) => {
+//     let instrument;
+//     const { id } = req.params;
    
-    try {
-        instrument = await Instrument.findById(id)
-        if(!instrument) {
-            return res.status(404).json({message: "El instrumento no fue encontrado"})
-        }
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
+//     try {
+//         instrument = await Instrument.findById(id)
+//         if(!instrument) {
+//             return res.status(404).json({message: "El instrumento no fue encontrado"})
+//         }
+//     } catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
    
-    res.instrument = instrument
-    next()
-}
+//     res.instrument = instrument
+//     next()
+// }
 
-router.get('/', async (req, res) => {
+router.get('/', getItems, async (req, res) => {
     try {
         const instruments = await Instrument.find()
         if(instruments.length === 0 ){
@@ -33,7 +35,11 @@ router.get('/', async (req, res) => {
     }
 }) 
 
-router.post('/', async (req, res) => {
+router.get('/:id', getItem, async(req, res) => {
+    res.json(res.book)
+}) 
+
+router.post('/', postItem, async (req, res) => {
     const {name,marca,tipo,subtipo,descripcion,precio,img_url } = req?.body
     
     if(!name || !marca || !tipo || !subtipo || !descripcion || !precio || !img_url) {
@@ -60,11 +66,7 @@ router.post('/', async (req, res) => {
     }
 })  
 
-router.get('/:id', getInstrument, async(req, res) => {
-    res.json(res.book)
-}) 
-
-router.put('/:id', getInstrument, async(req, res) => {
+router.put('/:id', updateItem, async(req, res) => {
     try {
         const instrument = res.instrument
         instrument.name  = req.body.name || instrument.name;
@@ -82,7 +84,7 @@ router.put('/:id', getInstrument, async(req, res) => {
     }
 })
 
-router.delete('/:id', getInstrument, async(req, res) => {
+router.delete('/:id', deleteItem, async(req, res) => {
     try {
         const instrument = res.instrument
         await instrument.deleteOne({_id: book._id})
