@@ -1,5 +1,5 @@
 import express from "express";
-import Instrument from '../models/product.model'
+import Instrument from '../models/product.model.js'
 
 const router = express.Router()
 
@@ -24,15 +24,18 @@ const getInstrument = async (req, res, next) => {
 router.get('/', async (req, res) => {
     try {
         const instruments = await Instrument.find()
-        res(instruments)
+        if(instruments.length === 0 ){
+            return res.status(204).json([])
+        }
+        res.json(instruments)
     } catch (error) {
         res.status(500).json({message: error.message })
     }
 }) 
 
 router.post('/', async (req, res) => {
-    const {name,marca,tipo,subtipo,descripcion,precio,img_url } = res?.body
-
+    const {name,marca,tipo,subtipo,descripcion,precio,img_url } = req?.body
+    
     if(!name || !marca || !tipo || !subtipo || !descripcion || !precio || !img_url) {
         return res.status(400).json({message: 'Todos los campos son obligatorios.'})
     }
@@ -50,9 +53,11 @@ router.post('/', async (req, res) => {
     )
 
     try {
-        const newInstrument = await Instrument.save()
+        const newInstrument = await instrument.save()
         res.status(201).json(newInstrument)
     } catch (error) {
         res.status(400).json({message: error.message})
     }
 })  
+
+export default router;

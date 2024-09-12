@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
     {
@@ -12,4 +12,4 @@ const productSchema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('Instrument', productSchema);
+export default mongoose.model('Instrument', productSchema);

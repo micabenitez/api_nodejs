@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import instrumentRoutes from '../src/routes/product.routes'
+import instrumentRoutes from '../src/routes/product.routes.js'
 import bodyParser from "body-parser";
 config()
 
