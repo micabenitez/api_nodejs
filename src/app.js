@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import instrumentRoutes from './routes/item.js'
+import { router } from "./routes/item.js"
 import bodyParser from "body-parser";
 import cors from "cors"
 config()
@@ -17,7 +17,7 @@ const db = mongoose.connection
 //middleware para parsear los elems 
 app.use(bodyParser.json())
 
-app.use('/instruments', instrumentRoutes)
+app.use(router)
 
 app.listen(port, () => {
     console.log(`Servidor en puerto ${port}`)

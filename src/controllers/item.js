@@ -1,18 +1,21 @@
-import { insertItem } from "../services/item.service"
-import handleHttp from "../utils/error.handle"
+import { insertProduct, getProduct, getProducts, updateProduct, deleteProduct } from "../services/item.service.js"
+import handleHttp from "../utils/error.handle.js"
 
 // los controlados solo reciben los datos, no deben tener logica de negocio
-const getItem = (req, res) => {
+const getItem = async ({ params }, res) => {
     try {
-
+        const { id } = params
+        const response = await getProduct(id)
+        res.send(response)
     } catch (error) {
         handleHttp(res, error.message)
     }
 }
 
-const getItems = (req, res) => {
+const getItems = async (req, res) => {
     try {
-
+        const response = await getProducts()
+        res.send(response)
     } catch (error) {
 
     }
@@ -28,19 +31,19 @@ const updateItem = (req, res) => {
 //           req.body o params.body
 const postItem = async ({ body }, res) => {
     try {
-        const createdItem = await insertItem(body)
+        const createdItem = await insertProduct(body)
         res.send(createdItem)
     } catch (error) {
 
     }
 }
 
-const deleteItem = (req, res) => {
-    try {
+// const deleteItem = (req, res) => {
+//     try {
 
-    } catch (error) {
+//     } catch (error) {
 
-    }
-}
+//     }
+// }
 
-export { getItem, getItems, updateItem, postItem, deleteItem }
+export { getItem, getItems, updateItem, postItem }
