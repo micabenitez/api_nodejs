@@ -1,6 +1,6 @@
 import { Router } from "express";
 // import Instrument from '../models/item.js'
-import { getItems, getItem, postItem } from "../controllers/item.js"; 
+import { getItems, getItem, postItem, updateItem, deleteItem } from "../controllers/item.js"; 
 
 const router = Router()
 
@@ -31,8 +31,8 @@ router.get('/:id', getItem, async(req, res) => {
 
 router.post('/', postItem)
 
-// router.put('/:id', updateItem)
+router.put('/:id', updateItem)
 
-// router.delete('/:id', deleteItem)
+router.delete('/:id', deleteItem)
 
 export {router};

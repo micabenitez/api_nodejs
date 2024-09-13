@@ -6,8 +6,8 @@ const insertProduct = async (item) => {
     return res
 }
 
-const getProduct= async (id) => {
-    const res = await ItemModel.findOne({_id:id})
+const getProduct = async (id) => {
+    const res = await ItemModel.findOne({ _id: id })
     return res
 }
 const getProducts = async () => {
@@ -15,13 +15,13 @@ const getProducts = async () => {
     return res
 }
 
-const updateProduct = async (item) => {
-    const res = await ItemModel.updateOne(item)
+const updateProduct = async (id, data) => {
+    const res = await ItemModel.findOneAndUpdate({ _id: id }, data, { new: true })
     return res
 }
 
-const deleteProduct= async (item) => {
-    const res = await ItemModel.create(item)
+const deleteProduct = async (id) => {
+    const res = await ItemModel.deleteOne({ _id: id })
     return res
 }
 

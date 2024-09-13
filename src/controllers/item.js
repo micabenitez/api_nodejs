@@ -21,8 +21,11 @@ const getItems = async (req, res) => {
     }
 }
 
-const updateItem = (req, res) => {
+const updateItem = async ({params, body}, res) => {
     try {
+        const { id } = params
+        const response = await updateProduct(id, body)
+        res.send(response)
 
     } catch (error) {
 
@@ -38,12 +41,15 @@ const postItem = async ({ body }, res) => {
     }
 }
 
-// const deleteItem = (req, res) => {
-//     try {
+const deleteItem = async ({params}, res) => {
+    try {
+        const {id} = params
+        const response = await deleteProduct(id)
+        res.send(response)
 
-//     } catch (error) {
+    } catch (error) {
 
-//     }
-// }
+    }
+}
 
-export { getItem, getItems, updateItem, postItem }
+export { getItem, getItems, updateItem, postItem, deleteItem }
