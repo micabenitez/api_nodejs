@@ -17,7 +17,7 @@ const getItems = async (req, res) => {
         const response = await getProducts()
         res.send(response)
     } catch (error) {
-
+        handleHttp(res, error.message)
     }
 }
 
@@ -28,7 +28,7 @@ const updateItem = async ({params, body}, res) => {
         res.send(response)
 
     } catch (error) {
-
+        handleHttp(res, error.message)
     }
 }
 //           req.body o params.body
@@ -37,7 +37,7 @@ const postItem = async ({ body }, res) => {
         const createdItem = await insertProduct(body)
         res.send(createdItem)
     } catch (error) {
-
+        handleHttp(res, error.message)
     }
 }
 
@@ -48,7 +48,7 @@ const deleteItem = async ({params}, res) => {
         res.send(response)
 
     } catch (error) {
-
+        handleHttp(res, error.message)
     }
 }
 
