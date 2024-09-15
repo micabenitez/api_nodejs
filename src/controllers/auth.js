@@ -1,8 +1,9 @@
 import express from "express"
-import { registerNewUser, loginUser } from "../services/auth.service"
+import { registerNewUser, loginUser } from "../services/auth.service.js"
 
 const register = async ({ body }, res) => {
-    const res = await registerNewUser()
+    const response = await registerNewUser(body)
+    res.send(response)
 }
 
 const login = async (req, res) => {
