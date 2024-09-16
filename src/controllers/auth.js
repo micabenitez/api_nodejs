@@ -6,15 +6,9 @@ const register = async ({ body }, res) => {
     res.send(response)
 }
 
-const login = async (req, res) => {
-    const { email, password } = req.body
-
-    try {
-        const hashedPassword = hashPassword(password)
-
-    } catch (error) {
-
-    }
+const login = async ({ body }, res) => {
+    const response = await loginUser(body)
+    res.send(response)
 }
 
 export { register, login }

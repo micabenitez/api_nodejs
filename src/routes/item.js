@@ -1,6 +1,7 @@
 import { Router } from "express";
 // import Instrument from '../models/item.js'
 import { getItems, getItem, postItem, updateItem, deleteItem } from "../controllers/item.js"; 
+import { checkJwt } from "../middleware/session.js";
 
 const router = Router()
 
@@ -23,7 +24,7 @@ const router = Router()
 //     next()
 // }
 
-router.get('/', getItems) 
+router.get('/', checkJwt, getItems) 
 
 router.get('/:id', getItem, async(req, res) => {
     res.json(res.book)

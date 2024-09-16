@@ -7,8 +7,9 @@ const encrypt = async (pass) => {
     return passwordHash;
 }
 
-const verified = () => {
-
+const verified = async (pass, passHash) => {
+    const isCorrect = await compare(pass, passHash)
+    return isCorrect
 }
 
 export { encrypt, verified }
