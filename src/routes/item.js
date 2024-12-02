@@ -5,25 +5,6 @@ import { checkJwt } from "../middleware/session.js";
 
 const router = Router()
 
-
-// //middleware
-// const getInstrument = async (req, res, next) => {
-//     let instrument;
-//     const { id } = req.params;
-   
-//     try {
-//         instrument = await Instrument.findById(id)
-//         if(!instrument) {
-//             return res.status(404).json({message: "El instrumento no fue encontrado"})
-//         }
-//     } catch (error) {
-//         res.status(500).json({message: error.message})
-//     }
-   
-//     res.instrument = instrument
-//     next()
-// }
-
 router.get('/', checkJwt, getItems) 
 
 router.get('/:id', getItem, async(req, res) => {

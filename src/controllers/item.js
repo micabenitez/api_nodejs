@@ -15,7 +15,10 @@ const getItem = async ({ params }, res) => {
 const getItems = async (req, res) => {
     try {
         const response = await getProducts()
-        res.send(response)
+        res.send({
+            response,
+            user: req.user
+        })
     } catch (error) {
         handleHttp(res, error.message)
     }
