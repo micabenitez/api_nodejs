@@ -5,7 +5,8 @@ import { checkJwt } from "../middleware/session.js";
 
 const router = Router()
 
-router.get('/', checkJwt, getItems) 
+//router.get('/', checkJwt, getItems) 
+router.get('/', getItems) 
 
 router.get('/:id', getItem, async(req, res) => {
     res.json(res.book)
