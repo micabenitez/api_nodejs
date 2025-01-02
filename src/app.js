@@ -24,7 +24,7 @@ const db = mongoose.connection
 //middleware para parsear los elems 
 // app.use(bodyParser.json())
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(specs))
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
 app.use("/items", ItemRouter)
 app.use("/auth", AuthRouter)
 
