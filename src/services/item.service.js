@@ -1,4 +1,3 @@
-// comunicacion con la db
 import { ItemModel } from "../models/item.js"
 
 const insertProduct = async (item) => {

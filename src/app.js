@@ -13,16 +13,12 @@ const corsOptions ={
     origin:'*', 
     credentials:true,           
     optionSuccessStatus:200,
- }
+}
 app.use(cors((corsOptions)))
 app.use(express.json())
 
 const port = process.env.PORT || 3000
 mongoose.connect(process.env.MONGO_URL, { dbName: process.env.MONGO_DB_NAME })
-const db = mongoose.connection
-
-//middleware para parsear los elems 
-// app.use(bodyParser.json())
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs))
 app.use("/items", ItemRouter)

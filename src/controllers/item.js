@@ -1,7 +1,6 @@
 import { insertProduct, getProduct, getProducts, updateProduct, deleteProduct } from "../services/item.service.js"
 import handleHttp from "../utils/error.handle.js"
 
-// los controlados solo reciben los datos, no deben tener logica de negocio
 const getItem = async ({ params }, res) => {
     try {
         const { id } = params

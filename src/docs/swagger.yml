@@ -89,7 +89,7 @@ paths:
     delete:
       tags:
         - Item
-      summary: Deletes a item by id
+      summary: Deletes an item by id
       operationId: deleteItem
       parameters:
         - name: id
