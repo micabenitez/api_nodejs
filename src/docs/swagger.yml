@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Documentación API Node.js - OpenAPI 3.0
+  version: 1.0.0
+tags:
+  - name: Item
+paths:
+  /items:
+    get:
+      tags:
+        - Item
+      summary: Return all the items
+      operationId: getItem
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    post:
+      tags:
+        - Item
+      summary: Add a new item to the store
+      operationId: addItem
+      requestBody:
+        description: Create a new item in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: Invalid input
+  /items/{id}:
+    get:
+      tags:
+        - Item
+      summary: Get an item by id
+      operationId: getItem
+      parameters:
+        - name: id
+          in: path
+          description: ID that need to be considered for filter
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+    put:
+      tags:
+        - Item
+      summary: Update an existing item
+      operationId: findPetsByTags
+      parameters:
+        - name: id
+          in: path
+          description: ID of the item to update
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+        '400':
+          description: Invalid tag value
+    delete:
+      tags:
+        - Item
+      summary: Deletes a item by id
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: 'ID of the item to delete'
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+components:
+  schemas:
+    Item:
+      type: object
+      required:
+        - name
+        - marca
+        - tipo
+        - subtipo
+        - descripcion
+        - precio
+        - img_url
+      properties:
+        name:
+          type: string
+        marca:
+          type: string
+        tipo:
+          type: string
+        subtipo:
+          type: string
+        descripcion:
+          type: string
+        precio:
+          type: integer
+        img_url:
+          type: string
+  requestBodies:
+    Item:
+      description: Item object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'

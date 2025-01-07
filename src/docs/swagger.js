@@ -8,7 +8,7 @@ const options = {
             version: "1.0.0",
         },
     },
-    apis: ["./src/routes/*.js"],
+    apis: ["./src/docs/swagger.yml"]
 };
 
 const specs = swaggerJSDoc(options);

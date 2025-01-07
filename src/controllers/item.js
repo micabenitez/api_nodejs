@@ -6,6 +6,9 @@ const getItem = async ({ params }, res) => {
     try {
         const { id } = params
         const response = await getProduct(id)
+        if (!response) {
+            return res.status(404).send({ error: "Item not found" })
+        }
         res.send(response)
     } catch (error) {
         handleHttp(res, error.message)
@@ -28,6 +31,9 @@ const updateItem = async ({params, body}, res) => {
     try {
         const { id } = params
         const response = await updateProduct(id, body)
+        if (!response) {
+            return res.status(404).send({ error: "Item not found" })
+        }
         res.send(response)
 
     } catch (error) {
@@ -37,8 +43,13 @@ const updateItem = async ({params, body}, res) => {
 //           req.body o params.body
 const postItem = async ({ body }, res) => {
     try {
+        if (!body.name || !body.descripcion || !body.tipo || !body.subtipo || !body.marca || !body.precio || !body.img_url) {
+            return res.status(400).send({ error: "Missing required fields" }) 
+        }
+
         const createdItem = await insertProduct(body)
-        res.send(createdItem)
+       
+        res.status(201).send(createdItem)
     } catch (error) {
         handleHttp(res, error.message)
     }
@@ -48,6 +59,9 @@ const deleteItem = async ({params}, res) => {
     try {
         const {id} = params
         const response = await deleteProduct(id)
+        if (!response) {
+            return res.status(404).send({ error: "Item not found" })
+        }
         res.send(response)
 
     } catch (error) {

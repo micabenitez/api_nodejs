@@ -31,3 +31,5 @@ app.use("/auth", AuthRouter)
 app.listen(port, () => {
     console.log(`Servidor en puerto ${port}`)
 })
+
+export default app;
